@@ -69,6 +69,14 @@
   border: 1px solid #99cea8;
   border-radius: 5px;
   background-color: #a7e9af;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+    height: 100px;
+    width: 100px;
 }
 
 body::-webkit-scrollbar {
@@ -76,10 +84,10 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 640px) {
-    .title {
-        display:none;
-    }
-    .title-mobile {
-        display:flex;
-    }
+  .title {
+    display: none;
+  }
+  .title-mobile {
+    display: flex;
+  }
 }
