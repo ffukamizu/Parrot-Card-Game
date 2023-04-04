@@ -1,0 +1,85 @@
+.top-header {
+  height: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eef9bf;
+}
+
+.title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 66px;
+  letter-spacing: -0.004em;
+  color: #75b79e;
+}
+
+.title-mobile {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  letter-spacing: -0.004em;
+  color: #75b79e;
+  display: none;
+}
+
+.page-background {
+  height: 100%;
+  width: 100%;
+  background-color: #eef9bf;
+}
+
+.page-body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eef9bf;
+}
+
+.footer {
+  height: 150px;
+  width: 100%;
+  background-color: #eef9bf;
+}
+
+.game-container {
+  height: 100%;
+  width: 100%;
+  max-width: 872px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #eef9bf;
+  gap: 34px;
+}
+
+.card-back {
+  height: 146px;
+  width: 117px;
+  box-sizing: border-box;
+  border: 1px solid #99cea8;
+  border-radius: 5px;
+  background-color: #a7e9af;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 640px) {
+    .title {
+        display:none;
+    }
+    .title-mobile {
+        display:flex;
+    }
+}
