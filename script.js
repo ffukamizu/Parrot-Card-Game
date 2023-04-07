@@ -5,16 +5,16 @@ do {
 } while (deckSize < 4 || deckSize > 14 || deckSize % 2 != 0);
 //creates an array with all the possible faces
 const deckStack = ["parrot-bob", "parrot-explody", "parrot-fiesta", "parrot-metal", "parrot-captain", "parrot-triplet", "parrot-unicorn"];
-//Fisher-Yates random sorting algorithm
+//Fisher-Yates random sorting algorithm applies randomness to deckStack array
 for (let i = deckStack.length - 1; i > 0; i--) {
   let j = Math.floor(Math.random() * (i + 1));
   let k = deckStack[i];
   deckStack[i] = deckStack[j];
   deckStack[j] = k;
 }
-//array with the desired deck size
+//deckStack array spliced to form a new array with desired deck size
 const deckPlayed = deckStack.splice(0, deckSize / 2);
-//display all selected cards
+//display all selected cards on screen
 for (let i = 0; i < deckPlayed.length; i++) {
   let element = document.getElementsByClassName(deckPlayed[i]);
   for (let i = 0; i < element.length; i++) {
@@ -33,10 +33,10 @@ function shuffle(array) {
   }
   return array;
 }
-//shuffles children back to the parent <div> randomized
-const container = document.querySelector(".game-container");
-const children = [...container.children];
+//shuffles all cards currently displayed
+const gameContainer = document.querySelector(".game-container");
+const children = [...gameContainer.children];
 shuffle(children);
 for (const child of children) {
-  container.appendChild(child);
+  gameContainer.appendChild(child);
 }
