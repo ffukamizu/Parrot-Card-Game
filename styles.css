@@ -62,21 +62,52 @@
   gap: 34px;
 }
 
-.card-back {
+.card {
   height: 146px;
   width: 117px;
+  position: relative;
+  display: none;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card-back {
+}
+
+.card:hover .card-front {
+  transform: rotateY(0deg);
+}
+
+.card:hover .card-back {
+  transform: rotateY(180deg);
+}
+
+.card-atrib {
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
   border: 1px solid #99cea8;
   border-radius: 5px;
   background-color: #a7e9af;
+  box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
   display: flex;
   justify-content: center;
   align-items: center;
+  backface-visibility: hidden;
+  transition: all 0.5s;
+  transform-style: preserve-3d;
+  position: absolute;
+}
+
+.card-played{
+  display: flex;
 }
 
 img {
-    height: 100px;
-    width: 100px;
+  height: 100px;
+  width: 100px;
 }
 
 body::-webkit-scrollbar {
