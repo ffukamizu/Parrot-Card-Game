@@ -54,12 +54,12 @@
   height: 100%;
   width: 100%;
   max-width: 872px;
+  gap: 34px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   background-color: #eef9bf;
-  gap: 34px;
 }
 
 .card {
@@ -73,32 +73,29 @@
   transform: rotateY(180deg);
 }
 
-.card-back {
-}
-
-.card:hover .card-front {
+.card-front-flip {
   transform: rotateY(0deg);
 }
 
-.card:hover .card-back {
+.card-back-flip {
   transform: rotateY(180deg);
 }
 
-.card-atrib {
+.card-front, .card-back {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   border: 1px solid #99cea8;
   border-radius: 5px;
-  background-color: #a7e9af;
   box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
+  background-color: #a7e9af;
   display: flex;
   justify-content: center;
   align-items: center;
-  backface-visibility: hidden;
+  position: absolute;
   transition: all 0.5s;
   transform-style: preserve-3d;
-  position: absolute;
+  backface-visibility: hidden;
 }
 
 .card-played{
