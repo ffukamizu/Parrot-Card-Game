@@ -5,9 +5,7 @@ do {
 } while (deckSize < 4 || deckSize > 14 || deckSize % 2 != 0);
 //Fischer-Yates random sorting algorithm
 function shuffle(array) {
-  let i = array.length,
-    k,
-    j;
+  let i = array.length, k, j;
   while (0 !== i) {
     j = Math.floor(Math.random() * i);
     i -= 1;
