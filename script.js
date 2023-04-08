@@ -36,42 +36,45 @@ shuffle(children);
 for (const child of children) {
   gameContainer.appendChild(child);
 }
-//
+//when called will flip a card
 function cardDisplay(element) {
   element.childNodes[1].classList.add("card-front-flip");
   element.childNodes[3].classList.add("card-back-flip");
 }
-
 let cardRevealed = false;
 let lastElement = null;
 let lastElementClass = null;
-
 function cardSelector(element, elementClass) {
+  //will reveal a card if no other is flipped
   if (cardRevealed === false) {
     cardDisplay(element);
     cardRevealed = true;
     lastElement = element;
     lastElementClass = elementClass;
+    //reveals another card if its the same face
   } else if (cardRevealed === true && elementClass === lastElementClass && element !== lastElement) {
     cardDisplay(element);
     cardRevealed = false;
+    //flips both cards back if they are the wrong pair
   } else if (cardRevealed === true && elementClass !== lastElementClass && element !== lastElement) {
     cardDisplay(element);
     cardRevealed = false;
     lastElementClass = null;
+    //disables click event
     document.addEventListener("click", handler, true);
     function handler(e) {
       e.stopPropagation();
       e.preventDefault();
     }
-    function cardHideFirst() {
+    //flips all cards back and restores click event, 1 sec delay
+    function cardHide() {
       element.childNodes[1].classList.remove("card-front-flip");
       element.childNodes[3].classList.remove("card-back-flip");
       lastElement.childNodes[1].classList.remove("card-front-flip");
       lastElement.childNodes[3].classList.remove("card-back-flip");
       document.removeEventListener("click", handler, true);
     }
-    setTimeout(cardHideFirst, 1000);
+    setTimeout(cardHide, 1000);
   } else {
     null;
   }
