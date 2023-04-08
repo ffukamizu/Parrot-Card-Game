@@ -68,7 +68,7 @@ function cardSelector(element, elementClass) {
     cardRevealed = false;
     cardCounter++;
     gameStop++;
-    setTimeout(gameEnd, 1050);
+    setTimeout(gameEnd, 1000);
     //flips both cards back if they are the wrong pair
   } else if (cardRevealed === true && elementClass !== lastElementClass && element !== lastElement) {
     cardDisplay(element);
