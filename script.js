@@ -1,55 +1,59 @@
-//asks the user for the deck size to be played
-let deckSize = 0;
-do {
-  deckSize = prompt("Insira a quantidade de cartas que deseja jogar, entre 4 e 14 (Números pares apenas)");
-} while (deckSize < 4 || deckSize > 14 || deckSize % 2 != 0);
-//Fischer-Yates random sorting algorithm
-function shuffle(array) {
-  let i = array.length,
-    k,
-    j;
-  while (0 !== i) {
-    j = Math.floor(Math.random() * i);
-    i -= 1;
-    k = array[i];
-    array[i] = array[j];
-    array[j] = k;
-  }
-  return array;
-}
-//creates an array with all the possible faces
-const deckStack = ["parrot-bob", "parrot-explody", "parrot-fiesta", "parrot-metal", "parrot-captain", "parrot-triplet", "parrot-unicorn"];
-shuffle(deckStack);
-//deckStack array spliced to form a new array with desired deck size
-const deckPlayed = deckStack.splice(0, deckSize / 2);
-//display all selected cards on screen
-for (let i = 0; i < deckPlayed.length; i++) {
-  const element = document.getElementsByClassName(deckPlayed[i]);
-  for (let i = 0; i < element.length; i++) {
-    element[i].classList.add("card-played");
-  }
-}
-//shuffles all cards currently displayed
-const gameContainer = document.querySelector(".game-container");
-const children = [...gameContainer.children];
-shuffle(children);
-for (const child of children) {
-  gameContainer.appendChild(child);
-}
-
 let cardRevealed = false;
 let lastElement = null;
 let lastElementClass = null;
 let cardCounter = 0;
+let deckSize = null;
+let deckPlayed = null;
+let chronometer = null;
 let gameStop = 0;
 let timer = 0;
-//starts chronometer 
+//asks the user for the deck size to be played
+function gameLoad() {
+  deckSize = 0;
+  do {
+    deckSize = prompt("Insira a quantidade de cartas que deseja jogar, entre 4 e 14 (Números pares apenas)");
+  } while (deckSize < 4 || deckSize > 14 || deckSize % 2 != 0);
+  //Fischer-Yates random sorting algorithm
+  chronometer = setInterval(gameTimer, 1000);
+  function shuffle(array) {
+    let i = array.length,
+      k,
+      j;
+    while (0 !== i) {
+      j = Math.floor(Math.random() * i);
+      i -= 1;
+      k = array[i];
+      array[i] = array[j];
+      array[j] = k;
+    }
+    return array;
+  }
+  //creates an array with all the possible faces
+  const deckStack = ["parrot-bob", "parrot-explody", "parrot-fiesta", "parrot-metal", "parrot-captain", "parrot-triplet", "parrot-unicorn"];
+  shuffle(deckStack);
+  //deckStack array spliced to form a new array with desired deck size
+  deckPlayed = deckStack.splice(0, deckSize / 2);
+  //display all selected cards on screen
+  for (let i = 0; i < deckPlayed.length; i++) {
+    const element = document.getElementsByClassName(deckPlayed[i]);
+    for (let i = 0; i < element.length; i++) {
+      element[i].classList.add("card-played");
+    }
+  }
+  //shuffles all cards currently displayed
+  const gameContainer = document.querySelector(".game-container");
+  const children = [...gameContainer.children];
+  shuffle(children);
+  for (const child of children) {
+    gameContainer.appendChild(child);
+  }
+}
+//starts chronometer
 function gameTimer() {
-  timer ++;
+  timer++;
   document.getElementById("timer").innerHTML = timer;
 }
 
-setInterval(gameTimer, 1000);
 //when called will flip a card
 function cardDisplay(element) {
   element.childNodes[1].classList.add("card-front-flip");
@@ -57,15 +61,25 @@ function cardDisplay(element) {
 }
 //displays end game mensage
 function gameEnd() {
-  if (gameStop == deckPlayed.length) {
-    clearInterval(setInterval(gameTimer, 1000));
-    alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer} segundos!`);
-    let reset = prompt("Quer jogar novamente? (sim/não)");
-    if (reset = "sim"){
-       location.reload(); 
-    } else {
-      null;
+  alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer} segundos!`);
+  let reset = prompt("Quer jogar novamente? (sim/não)");
+  if (reset == "sim") {
+    for (let i = 0; i < deckPlayed.length; i++) {
+      const element = document.getElementsByClassName(deckPlayed[i]);
+      for (let i = 0; i < element.length; i++) {
+        element[i].classList.remove("card-played");
+        element[i].childNodes[1].classList.remove("card-front-flip");
+        element[i].childNodes[3].classList.remove("card-back-flip");
+      }
     }
+    clearInterval(chronometer);
+    cardRevealed = false;
+    lastElement = null;
+    lastElementClass = null;
+    cardCounter = 0;
+    gameStop = 0;
+    timer = 0;
+    gameLoad();
   } else {
     null;
   }
@@ -85,7 +99,9 @@ function cardSelector(element, elementClass) {
     cardRevealed = false;
     cardCounter++;
     gameStop++;
-    setTimeout(gameEnd, 1000);
+    if (gameStop == deckPlayed.length) {
+      setTimeout(gameEnd, 1000);
+    }
     //flips both cards back if they are the wrong pair
   } else if (cardRevealed === true && elementClass !== lastElementClass && element !== lastElement) {
     cardDisplay(element);
@@ -115,3 +131,6 @@ function cardSelector(element, elementClass) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  gameLoad();
+});
