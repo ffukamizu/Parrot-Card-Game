@@ -72,6 +72,7 @@ function gameEnd() {
         element[i].childNodes[3].classList.remove("card-back-flip");
       }
     }
+    document.getElementById("timer").innerHTML = "0"
     clearInterval(chronometer);
     cardRevealed = false;
     lastElement = null;
