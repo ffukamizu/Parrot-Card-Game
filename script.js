@@ -7,6 +7,7 @@ let chronometer = null;
 let cardCounter = 0;
 let gameStop = 0;
 let timer = 0;
+let playedCard = [];
 //asks the user for the deck size to be played
 function gameLoad() {
   deckSize = 0;
@@ -85,6 +86,9 @@ function gameEnd() {
       }
     }
 
+    playedCard = [];
+    console.log(playedCard);
+
     document.getElementById("timer").innerHTML = "0";
 
     clearInterval(chronometer);
@@ -95,6 +99,7 @@ function gameEnd() {
     cardCounter = 0;
     gameStop = 0;
     timer = 0;
+    
 
     gameLoad();
   } else {
@@ -103,8 +108,10 @@ function gameEnd() {
 }
 //core gameplay function, handles card flip and unflip logic
 function cardSelector(element, elementClass) {
-  if (cardRevealed === false) {
+  if (cardRevealed === false && !playedCard.includes(elementClass)) {
     cardDisplay(element);
+
+    playedCard.push(elementClass);
 
     cardRevealed = true;
     lastElement = element;
@@ -124,6 +131,8 @@ function cardSelector(element, elementClass) {
     }
   } else if (cardRevealed === true && elementClass !== lastElementClass && element !== lastElement) {
     cardDisplay(element);
+
+    playedCard.pop();
 
     cardRevealed = false;
     lastElementClass = null;
