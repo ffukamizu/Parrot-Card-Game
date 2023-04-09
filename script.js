@@ -1,20 +1,23 @@
 let cardRevealed = false;
 let lastElement = null;
 let lastElementClass = null;
-let cardCounter = 0;
 let deckSize = null;
 let deckPlayed = null;
 let chronometer = null;
+let cardCounter = 0;
 let gameStop = 0;
 let timer = 0;
+
 //asks the user for the deck size to be played
 function gameLoad() {
   deckSize = 0;
+
   do {
     deckSize = prompt("Insira a quantidade de cartas que deseja jogar, entre 4 e 14 (Números pares apenas)");
   } while (deckSize < 4 || deckSize > 14 || deckSize % 2 != 0);
-  //Fischer-Yates random sorting algorithm
+
   chronometer = setInterval(gameTimer, 1000);
+  //Fischer-Yates random sorting algorithm
   function shuffle(array) {
     let i = array.length,
       k,
@@ -36,6 +39,7 @@ function gameLoad() {
   //display all selected cards on screen
   for (let i = 0; i < deckPlayed.length; i++) {
     const element = document.getElementsByClassName(deckPlayed[i]);
+
     for (let i = 0; i < element.length; i++) {
       element[i].classList.add("card-played");
     }
@@ -48,9 +52,11 @@ function gameLoad() {
     gameContainer.appendChild(child);
   }
 }
+
 //starts chronometer
 function gameTimer() {
   timer++;
+
   document.getElementById("timer").innerHTML = timer;
 }
 
@@ -62,27 +68,33 @@ function cardDisplay(element) {
 //displays end game mensage
 function gameEnd() {
   alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer} segundos!`);
+
   let reset = prompt("Você gostaria de reiniciar a partida? (sim ou não)");
+
   if (reset == "sim") {
     for (let i = 0; i < deckPlayed.length; i++) {
       const element = document.getElementsByClassName(deckPlayed[i]);
+
       for (let i = 0; i < element.length; i++) {
         element[i].classList.remove("card-played");
         element[i].childNodes[1].classList.remove("card-front-flip");
         element[i].childNodes[3].classList.remove("card-back-flip");
       }
     }
-    document.getElementById("timer").innerHTML = "0"
+
+    document.getElementById("timer").innerHTML = "0";
     clearInterval(chronometer);
+
     cardRevealed = false;
     lastElement = null;
     lastElementClass = null;
     cardCounter = 0;
     gameStop = 0;
     timer = 0;
+
     gameLoad();
   } else {
-    null;
+    clearInterval(chronometer);
   }
 }
 //core gameplay function
@@ -100,6 +112,7 @@ function cardSelector(element, elementClass) {
     cardRevealed = false;
     cardCounter++;
     gameStop++;
+    
     if (gameStop == deckPlayed.length) {
       setTimeout(gameEnd, 1000);
     }
@@ -111,6 +124,7 @@ function cardSelector(element, elementClass) {
     cardCounter++;
     //disables click event
     document.addEventListener("click", disableClick, true);
+    
     function disableClick(e) {
       e.stopPropagation();
       e.preventDefault();
