@@ -119,6 +119,8 @@ function cardSelector(element, elementClass) {
 
     if (gameStop == deckPlayed.length) {
       setTimeout(gameEnd, 1000);
+    } else {
+      null;
     }
   } else if (cardRevealed === true && elementClass !== lastElementClass && element !== lastElement) {
     cardDisplay(element);
