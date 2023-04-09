@@ -62,7 +62,7 @@ function cardDisplay(element) {
 //displays end game mensage
 function gameEnd() {
   alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer} segundos!`);
-  let reset = prompt("Quer jogar novamente? (sim/não)");
+  let reset = prompt("Você gostaria de reiniciar a partida? (sim ou não)");
   if (reset == "sim") {
     for (let i = 0; i < deckPlayed.length; i++) {
       const element = document.getElementsByClassName(deckPlayed[i]);
