@@ -36,11 +36,21 @@ shuffle(children);
 for (const child of children) {
   gameContainer.appendChild(child);
 }
+
 let cardRevealed = false;
 let lastElement = null;
 let lastElementClass = null;
 let cardCounter = 0;
 let gameStop = 0;
+let timer = 0;
+
+function gameTimer() {
+  timer ++;
+  document.getElementById("timer").innerHTML = timer;
+}
+
+setInterval(gameTimer, 1000);
+
 //when called will flip a card
 function cardDisplay(element) {
   element.childNodes[1].classList.add("card-front-flip");
@@ -49,11 +59,13 @@ function cardDisplay(element) {
 //display alert when game ends
 function gameEnd() {
   if (gameStop == deckPlayed.length) {
-    alert(`Você ganhou em ${cardCounter} jogadas!`);
+    clearInterval(setInterval(gameTimer, 1000));
+    alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer - 1} segundos!`);
   } else {
     null;
   }
 }
+
 function cardSelector(element, elementClass) {
   //will reveal a card if no other is flipped
   if (cardRevealed === false) {
@@ -97,3 +109,4 @@ function cardSelector(element, elementClass) {
     null;
   }
 }
+
