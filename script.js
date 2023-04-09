@@ -125,7 +125,7 @@ function cardSelector(element, elementClass) {
       document.removeEventListener("click", disableClick, true);
     }
     setTimeout(cardHide, 1000);
-    setTimeout(restoreClick, 1100);
+    setTimeout(restoreClick, 1000);
   } else {
     null;
   }
