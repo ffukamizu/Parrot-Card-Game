@@ -43,29 +43,34 @@ let lastElementClass = null;
 let cardCounter = 0;
 let gameStop = 0;
 let timer = 0;
-
+//starts chronometer 
 function gameTimer() {
   timer ++;
   document.getElementById("timer").innerHTML = timer;
 }
 
 setInterval(gameTimer, 1000);
-
 //when called will flip a card
 function cardDisplay(element) {
   element.childNodes[1].classList.add("card-front-flip");
   element.childNodes[3].classList.add("card-back-flip");
 }
-//display alert when game ends
+//displays end game mensage
 function gameEnd() {
   if (gameStop == deckPlayed.length) {
     clearInterval(setInterval(gameTimer, 1000));
     alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer - 1} segundos!`);
+    let reset = prompt("Quer jogar novamente? (sim/não)");
+    if (reset = "sim"){
+       location.reload(); 
+    } else {
+      null;
+    }
   } else {
     null;
   }
 }
-
+//core gameplay function
 function cardSelector(element, elementClass) {
   //will reveal a card if no other is flipped
   if (cardRevealed === false) {
@@ -93,7 +98,7 @@ function cardSelector(element, elementClass) {
       e.stopPropagation();
       e.preventDefault();
     }
-    //flips all cards back and restores click event, 1 sec delay
+    //unflip a card when called
     function cardHide() {
       element.childNodes[1].classList.remove("card-front-flip");
       element.childNodes[3].classList.remove("card-back-flip");
