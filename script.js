@@ -59,7 +59,7 @@ function cardDisplay(element) {
 function gameEnd() {
   if (gameStop == deckPlayed.length) {
     clearInterval(setInterval(gameTimer, 1000));
-    alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer - 1} segundos!`);
+    alert(`Você ganhou em ${cardCounter} jogadas! A duração do jogo foi de ${timer} segundos!`);
     let reset = prompt("Quer jogar novamente? (sim/não)");
     if (reset = "sim"){
        location.reload(); 
