@@ -86,13 +86,11 @@ function gameEnd() {
       }
     }
 
-    playedCard = [];
-    console.log(playedCard);
-
     document.getElementById("timer").innerHTML = "0";
-
+    
     clearInterval(chronometer);
-
+    
+    playedCard = [];
     cardRevealed = false;
     lastElement = null;
     lastElementClass = null;
@@ -100,7 +98,6 @@ function gameEnd() {
     gameStop = 0;
     timer = 0;
     
-
     gameLoad();
   } else {
     clearInterval(chronometer);
