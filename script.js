@@ -126,7 +126,7 @@ function cardSelector(element, elementClass) {
     } else {
       null;
     }
-  } else if (cardRevealed === true && elementClass !== lastElementClass && element !== lastElement) {
+  } else if (cardRevealed === true && elementClass !== lastElementClass && !playedCard.includes(elementClass)) {
     cardDisplay(element);
 
     playedCard.pop();
